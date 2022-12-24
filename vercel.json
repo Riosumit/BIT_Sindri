@@ -4,7 +4,7 @@
         {
             "src": "BIT_Sindri/wsgi.py",
             "use": "@vercel/python",
-            "cinfig": {  "maxLambdaSize": "15mb", "runtime": "python3.9" }
+            "config": {  "maxLambdaSize": "15mb", "runtime": "python3.9" }
         },
         {
             "src": "build_files.sh",
