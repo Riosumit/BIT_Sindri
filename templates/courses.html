@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <title>Courses</title>
+</head>
+<body>
+    <nav>
+        <a href="home">Back to home</a>
+    </nav>
+    <div class="table">
+        <div class="tr" style="background-color: rgb(230, 167, 84);">
+            <div class="td"><b>NAME</b></div>
+            <div class="td"><b>Degree</b></div>
+            <div class="td"><b>Number of Students</b></div>
+            <div class="td"><b>Delete</b></div>
+        </div>
+        {% if courses %}
+            {% for name, degree, nos in courses %}
+            <div class="tr">
+                <div class="td">{{name}}</div>
+                <div class="td">{{degree}}</div>
+                <div class="td">{{nos}}</div>
+                <button class="td" onclick="del('{{name}}')">Remove course</button>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="tr">
+                <h1 style="color: gray;">No course Avilable</h1>
+            </div>
+        {% endif %}
+    </div><br>
+    <center><a href="add_course" style="background-color: rgb(7, 189, 196);"><button>Add course</button></a></center>
+    <div class="warning" style="display: none;">
+        <form action="course" method="post">
+            {% csrf_token %}
+             <input type="text" id="del_item" name="del_item" style="display: none;">
+             <p id="msg"></p><br>
+             <div class="but">
+                 <button type="submit">Yes</button>
+                 <button type="reset" onclick="no_del()">No</button>
+             </div>
+        </form>
+    </div>
+    <script>
+        function del(item){
+            document.getElementById("del_item").value = item;
+            document.getElementById("msg").innerHTML = "Are you sure? You want to delete <b>" + item + "</b>."
+            document.getElementsByClassName("warning")[0].style.display = "flex";
+        }
+        function no_del(){
+            document.getElementById("del_item").value = "";
+            document.getElementById("msg").innerHTML = "";
+            document.getElementsByClassName("warning")[0].style.display = "none";
+        }
+    </script>
+</body>
+</html>

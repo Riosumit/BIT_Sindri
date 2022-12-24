@@ -50,7 +50,7 @@ nav a{
 .form label{
     margin: 2vh 6vw;
 }
-form input{
+form input, form select{
     width: 300px;
     max-width: 80vw;
     height: 30px;

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <title>Result</title>
+</head>
+<body class="body">
+    <nav>
+        <a href="home">Back to Home</a>
+    </nav>
+    <form action="add_course" method="post" class="form">
+        {%csrf_token%}
+        <center><div class="msg">{{msg}}</div></center>
+        <label for="name">Name : <br>
+            <input type="text" name="name" id="name" required>
+        </label>
+        <label for="degree">Degree : <br>
+            <select name="degree" id="degree" required>
+                <option disabled selected value><b>Select</b></option>
+                {% for name, duration in degree %}
+                    <option value="{{name}}">{{name}}</option>
+                {% endfor %}
+            </select>
+        </label>
+        <label for="nos">No of Student : <br>
+            <input type="number" name="nos" id="nos" required>
+        </label>
+        <center><button type="submit">Add course</button></center>
+    </form>
+</body>
+</html>

@@ -80,19 +80,20 @@
                 </label>
             </div>
             <div class="row">
+                <label for="degree">Degree :<br>
+                    <select name="degree" id="degree" required>
+                        <option disabled selected value><b>Select</b></option>
+                        {% for name, duration in degree %}
+                            <option value="{{name}}">{{name}}</option>
+                        {% endfor %}
+                    </select>
+                </label>
                 <label for="course">Course :<br>
                     <select name="course" id="course" required>
                         <option disabled selected value><b>Select</b></option>
-                        <option value="B-tech">B-Tech</option>
-                        <option value="M-tech">M-Tech</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </label>
-                <label for="type">Type :<br>
-                    <select name="type" id="type" required>
-                        <option disabled selected value><b>Select</b></option>
-                        <option value="regular">Regular</option>
-                        <option value="lateral">Lateral Entry</option>
+                        {% for name, degree, nos in course %}
+                              <option>{{name}}</option>"
+                        {% endfor %}
                     </select>
                 </label>
             </div>
@@ -123,6 +124,7 @@
         
     </form>
     <script>
+        s = ''
         var year = document.getElementById('year').value;
         document.getElementById('year').addEventListener('input', function(){
             var year = document.getElementById('year').value;
@@ -139,6 +141,17 @@
                 document.getElementById('semester').innerHTML='<option disabled selected value><b>Select</b></option><option value="7th">7th Semester</option><option value="8th">8th Semester</option>';
             }
         })
+        // document.getElementById('degree').addEventListener('input', function(){
+        //     console.log("dkhjghgc");
+        //     var deg = document.getElementById('degree').value;
+        //     var s = "<option disabled selected value><b>Select</b></option>";
+        //     {% for name, degree, nos in course %}
+        //         if({{degree}} == deg ){
+        //             s+="<option>" + {{name}} + "</option>";
+        //         }
+        //     {% endfor %}
+        //     document.getElementById('course').innerHTML = s;
+        // })
     </script>
 </body>
 </html>

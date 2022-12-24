@@ -66,3 +66,34 @@ def add_degree(request):
             msg = 'degree Added Succesfully'
     param = {'msg':msg}
     return render(request, 'add_degree.html', param)
+
+def course(request):
+    del_item = request.POST.get('del_item','')
+    print(del_item)
+    if(del_item != ""):
+        cursor.execute("DELETE FROM course WHERE name = %s", (del_item,))
+    cursor.execute("SELECT * FROM course")
+    courses = cursor.fetchall()
+    param = {'courses':courses}
+    return render(request, 'courses.html', param)
+
+def add_course(request):
+    msg = ''
+    name = request.POST.get('name', '')
+    deg = request.POST.get('degree','')
+    nos = request.POST.get('nos','')
+    if(name != '' and deg != '' and nos != ''):
+        cursor.execute('SELECT * FROM course WHERE name = %s', (name,))
+        course = cursor.fetchone()
+        if course:
+            msg = 'course already exists'
+        else:
+            cursor.execute('INSERT INTO course VALUES(%s, %s, %s)', (name, deg, nos,))
+            mydb.commit()
+            name=''
+            duration=''
+            msg = 'course Added Succesfully'
+    cursor.execute('SELECT * FROM degree')
+    degree = cursor.fetchall()
+    param = {'msg':msg, 'degree': degree}
+    return render(request, 'add_course.html', param)
