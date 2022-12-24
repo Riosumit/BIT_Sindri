@@ -1,0 +1,119 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+}
+.body{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../img/bg1.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+nav{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+    width: 100vw;
+}
+nav a{
+    border: 1px solid black;
+    padding: 5px;
+    background-color: aqua;
+    text-decoration: none;
+    margin: 5px;
+}
+.body nav{
+    position: absolute;
+    top: 0px;
+}
+.form{
+    display: flex;
+    max-width: 90vw;
+    flex-direction: column;
+    font-size: 1.5rem;
+    background-image: linear-gradient(45deg, rgb(32 38 90), rgb(59 149 252));
+    border-radius: 15px;
+    padding: 50px 0px;
+    color: #bff6f0;
+}
+.form label{
+    margin: 2vh 6vw;
+}
+form input{
+    width: 300px;
+    max-width: 80vw;
+    height: 30px;
+    margin: 5px 0vw;
+    background-color: rgb(101 218 241);
+}
+.table{
+    display: flex;
+    flex-direction: column;
+    width: 95vw;
+    margin: 10px 0px;
+}
+.table .tr{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 5px 0px;
+    margin: 1px 0px;
+    background-color: rgb(207, 188, 188);
+}
+.table .td{
+    width: 30vw;
+    padding: 8px 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+.warning{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.144);
+}
+.warning form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 300px;
+    max-width: 90vw;
+    background-color: aliceblue;
+    padding: 5vw;
+}
+.warning form .but{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+}
+.warning button{
+    width: 40%;
+    height: 30px;
+    /* background-color: rgb(0, 80, 0); */
+}
+button{
+    width: 300px;
+    height: 40px;
+    max-width: 90vw;
+}

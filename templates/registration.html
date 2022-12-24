@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'css/student.css' %}">
+    <title>Result</title>
+</head>
+<body>
+    <form action="registration" method="post" class="r_form">
+        {%csrf_token%}
+        <div class="form_title"><center>Registration Details</center></div>
+        <div class="form_content form1">
+            <center><div class="msg" style="font-weight: 500;color: rgb(228, 31, 31);">{{msg}}</div></center>
+            <div class="row">
+                <label for="reg_no">Registration No. :<br>
+                    <input type="text" name="reg_no" id="reg_no" value="{{reg_no}}" required>
+                </label>
+                <label for="roll_no">Roll No. :<br>
+                    <input type="text" name="roll_no" id="roll_no" value="{{roll_no}}" required>
+                </label>
+            </div>
+            <div class="row">
+                <label for="f_name">First Name :<br>
+                    <input type="text" name="f_name" id="f_name" value="{{f_name}}" required>
+                </label>
+                <label for="l_name">Last Name :<br>
+                    <input type="text" name="l_name" id="l_name" value="{{l_name}}" required>
+                </label>
+            </div>
+            <div class="row">
+                <label for="caste">Caste :<br>
+                    <select name="caste" id="caste" required>
+                        <option disabled selected value><b>Select</b></option>
+                        <option value="general">General</option>
+                        <option value="obc">OBC</option>
+                        <option value="scst">SC/ST</option>
+                    </select>
+                </label>
+                <label for="gender">Gender :<br>
+                    <select name="gender" id="gender" required>
+                        <option disabled selected value><b>Select</b></option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </label>
+            </div>
+            <div class="row">
+                <label for="father">Father Name :<br>
+                    <input type="text" name="father" id="father" value="{{father}}" required>
+                </label>
+                <label for="father_occ"> Father Occupation :<br>
+                    <select name="father_occ" id="father_occ" required>
+                        <option disabled selected value><b>Select</b></option>
+                        <option value="NA">NA</option>
+                        <option value="Government">Government Job</option>
+                        <option value="Private">Private Job</option>
+                        <option value="Business">Business</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </label>
+            </div>
+            <div class="row">
+                <label for="mother">Mother Name :<br>
+                    <input type="text" name="mother" id="mother" value="{{mother}}" required>
+                </label>
+                <label for="mother_occ">Mother Occupation :<br>
+                    <select name="mother_occ" id="mother_occ" required>
+                        <option disabled selected value><b>Select</b></option>
+                        <option value="NA">NA</option>
+                        <option value="housewife">Housewife</option>
+                        <option value="gov">Government Job</option>
+                        <option value="private">Private Job</option>
+                        <option value="business">Business</option>
+                        <option value="other">Other</option>
+                    </select>
+                </label>
+            </div>
+            <div class="row">
+                <label for="course">Course :<br>
+                    <select name="course" id="course" required>
+                        <option disabled selected value><b>Select</b></option>
+                        <option value="B-tech">B-Tech</option>
+                        <option value="M-tech">M-Tech</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </label>
+                <label for="type">Type :<br>
+                    <select name="type" id="type" required>
+                        <option disabled selected value><b>Select</b></option>
+                        <option value="regular">Regular</option>
+                        <option value="lateral">Lateral Entry</option>
+                    </select>
+                </label>
+            </div>
+            <div class="row">
+                <label for="year">Year :<br>
+                    <select name="year" id="year" required>
+                        <option disabled selected value><b>Select</b></option>
+                        <option value="first">First</option>
+                        <option value="second">Second</option>
+                        <option value="third">Third</option>
+                        <option value="final">Final</option>
+                    </select>
+                </label>
+                <label for="semester">Semester :<br>
+                    <select name="semester" id="semester" required>
+                        <option disabled selected value><b>Select</b></option>
+                    </select>
+                </label>
+            </div>
+            <center><button type="submit">Submit</button></center>
+        </div>
+        <!-- <div class="form_content form2">
+            <label for="photo">Photo :<br>
+                <input type="file" name="photo" id="photo">
+            </label>
+            <center><button type="submit">Submit</button></center>
+        </div> -->
+        
+    </form>
+    <script>
+        var year = document.getElementById('year').value;
+        document.getElementById('year').addEventListener('input', function(){
+            var year = document.getElementById('year').value;
+            if(year == 'first'){
+                document.getElementById('semester').innerHTML='<option disabled selected value><b>Select</b></option><option value="1st">1st Semester</option><option value="2nd">2nd Semester</option>';
+            }
+            else if(year == 'second'){
+                document.getElementById('semester').innerHTML='<option disabled selected value><b>Select</b></option><option value="3rd">3rd Semester</option><option value="4th">4th Semester</option>';
+            }
+            else if(year == 'third'){
+                document.getElementById('semester').innerHTML='<option disabled selected value><b>Select</b></option><option value="5th">5th Semester</option><option value="6th">6th Semester</option>';
+            }
+            else if(year == 'final'){
+                document.getElementById('semester').innerHTML='<option disabled selected value><b>Select</b></option><option value="7th">7th Semester</option><option value="8th">8th Semester</option>';
+            }
+        })
+    </script>
+</body>
+</html>
