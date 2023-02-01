@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 import mysql.connector
 
-# mydb = mysql.connector.connect(host="localhost",user="root",password="",charset='utf8',database="BIT_Sindri")
-mydb = mysql.connector.connect(host="sql6.freesqldatabase.com",user="sql6586203",password="WduumesPgh",charset='utf8',database="sql6586203")
+mydb = mysql.connector.connect(host="localhost",user="root",password="",charset='utf8',database="BIT_Sindri")
+# mydb = mysql.connector.connect(host="sql6.freesqldatabase.com",user="sql6586203",password="WduumesPgh",charset='utf8',database="sql6586203")
 cursor=mydb.cursor()
 # cursor.execute('SELECT * FROM accounts WHERE username = %s AND password = %s', (username, password,))
 # account = cursor.fetchone()

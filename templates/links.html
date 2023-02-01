@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <title>links</title>
+    <style>
+        .td{
+            width: 20vw !important;
+        }
+        a{
+            color: rgb(65, 65, 209);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="home">Back to home</a>
+    </nav>
+    <div class="table">
+        <div class="tr" style="background-color: rgb(230, 167, 84);">
+            <div class="td"><b>NAME</b></div>
+            <div class="td"><b>LINK</b></div>
+            <div class="td"><b>STATUS</b></div>
+            <div class="td"><b>OPTIONS</b></div>
+        </div>
+        {% if links %}
+            {% for name, link, status in links %}
+            <div class="tr">
+                <div class="td">{{name}}</div>
+                <div class="td"><a href="/{{link}}">{{URL}}/{{link}}</a></div>
+                <div class="td" id="status">{{status}}</div>
+                <div style="display: flex; flex-direction: column;"><button class="td" onclick="del('{{name}}')">Remove link</button><br><button class="td status_btn" onclick="change('{{name}}','{{status}}')">{{status}}</button></div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="tr">
+                <h1 style="color: gray;">No link Avilable</h1>
+            </div>
+        {% endif %}
+    </div><br>
+    <center><a href="add_link" style="background-color: rgb(7, 189, 196);"><button>Add link</button></a></center>
+    <div class="warning" style="display: none;">
+        <form action="link" method="post">
+            {% csrf_token %}
+             <input type="text" id="del_item" name="del_item" style="display: none;">
+             <input type="text" id="Activate" name="Activate" style="display: none;">
+             <input type="text" id="Deactivate" name="Deactivate" style="display: none;">
+             <p id="msg"></p><br>
+             <div class="but">
+                 <button type="submit">Yes</button>
+                 <button type="reset" onclick="no_del()">No</button>
+             </div>
+        </form>
+    </div>
+    <script>
+        Array.from(document.getElementsByClassName('status_btn')).forEach(style_button);
+        function style_button(button){
+            if(button.innerHTML == "Active"){
+                button.innerHTML = "Deactivate";
+                button.style.backgroundColor = "#f71a1a";
+            }
+            else{
+                button.innerHTML = "Activate";
+                button.style.backgroundColor = "#15d715";
+            }
+        }
+        function del(item){
+            document.getElementById("del_item").value = item;
+            document.getElementById("msg").innerHTML = "Are you sure? You want to delete <b>" + item + "</b>."
+            document.getElementsByClassName("warning")[0].style.display = "flex";
+        }
+        function no_del(){
+            document.getElementById("del_item").value = "";
+            document.getElementById("msg").innerHTML = "";
+            document.getElementsByClassName("warning")[0].style.display = "none";
+        }
+        function change(name, status){
+            if(status == "Active"){
+                document.getElementById("Deactivate").value = name;
+                document.getElementById("msg").innerHTML = "Are you sure? You want to Deactivate <b>" + name + "</b>."
+                document.getElementsByClassName("warning")[0].style.display = "flex";
+            }
+            else{
+                document.getElementById("Activate").value = name;
+                document.getElementById("msg").innerHTML = "Are you sure? You want to Activate <b>" + name + "</b>."
+                document.getElementsByClassName("warning")[0].style.display = "flex";
+            }
+        }
+    </script>
+</body>
+</html>

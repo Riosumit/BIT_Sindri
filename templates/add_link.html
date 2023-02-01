@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <title>Add Link</title>
+</head>
+<body class="body">
+    <nav>
+        <a href="home">Back to Home</a>
+    </nav>
+    <form action="add_link" method="post" class="form">
+        {%csrf_token%}
+        <div class="msg">{{msg}}</div>
+        <label for="name">Name : <br>
+            <input type="text" name="name" id="name">
+        </label>
+        <label for="link">Link : <br>
+            <input type="text" name="link" id="link">
+        </label>
+        <label for="status">Current Status : <br>
+            <select name="status" id="status" required>
+                <option disabled selected value><b>Select</b></option>
+                <option value="Active">Active</option>
+                <option value="Passive">Passive</option>
+            </select>
+        </label>
+        <center><button type="submit">Add Link</button></center>
+    </form>
+</body>
+</html>

@@ -2,8 +2,8 @@ from urllib import request
 from django.shortcuts import render, redirect
 import mysql.connector
 
-# mydb = mysql.connector.connect(host="localhost",user="root",password="",charset='utf8',database="BIT_Sindri")
-mydb = mysql.connector.connect(host="sql6.freesqldatabase.com",user="sql6586203",password="WduumesPgh",charset='utf8',database="sql6586203")
+mydb = mysql.connector.connect(host="localhost",user="root",password="",charset='utf8',database="BIT_Sindri")
+# mydb = mysql.connector.connect(host="sql6.freesqldatabase.com",user="sql6586203",password="WduumesPgh",charset='utf8',database="sql6586203")
 cursor=mydb.cursor()
 # cursor.execute('SELECT * FROM accounts WHERE username = %s AND password = %s', (username, password,))
 # account = cursor.fetchone()
@@ -97,3 +97,38 @@ def add_course(request):
     degree = cursor.fetchall()
     param = {'msg':msg, 'degree': degree}
     return render(request, 'add_course.html', param)
+
+def link(request):
+    del_item = request.POST.get('del_item','')
+    Activate = request.POST.get('Activate','')
+    Deactivate = request.POST.get('Deactivate','')
+    URL = request.get_host()
+    if(del_item != ""):
+        cursor.execute("DELETE FROM links WHERE name = %s", (del_item,))
+    if(Activate != ""):
+        cursor.execute("UPDATE links SET status = %s WHERE name = %s", ("Active", Activate))
+    if(Deactivate != ""):
+        cursor.execute("UPDATE links SET status = %s WHERE name = %s", ("Passive", Deactivate))
+    cursor.execute("SELECT * FROM links")
+    links = cursor.fetchall()
+    param = {'links':links, 'URL': URL}
+    return render(request, 'links.html', param)
+
+def add_link(request):
+    msg = ''
+    name = request.POST.get('name', '')
+    li = request.POST.get('link','')
+    status = request.POST.get('status','')
+    if(name != '' and li != ''):
+        cursor.execute('SELECT * FROM links WHERE name = %s', (name,))
+        link = cursor.fetchone()
+        if link:
+            msg = 'Link already exists'
+        else:
+            cursor.execute('INSERT INTO links VALUES(%s, %s, %s)', (name, li, status,))
+            mydb.commit()
+            name=''
+            duration=''
+            msg = 'Link Added Succesfully'
+    param = {'msg':msg,}
+    return render(request, 'add_link.html', param)
